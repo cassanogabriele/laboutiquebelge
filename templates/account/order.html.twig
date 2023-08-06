@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Mes commandes - La boutique belge</h1>
+    C'est dans cet espace que vous allez pouvoir gérer toutes vos commandes.
+    <br>
+    <a href="{{ path('account') }}">Retour</a>
+  
+    {% if app.user.orders | length == 0 %}
+        <hr>
+        <p class="text-center">
+        Vous n'avez pas encore passé de commande sur la boutique belge.</a>
+        </p>
+    {% else %}
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Référénce</th>
+                <th scope="col">Passée le</th>
+                <th scope="col">Produit(s)</th>
+                <th scope="col">Total</th>
+                </tr>
+            </thead>
+  
+            <tbody>
+                {% for order in orders %}                       
+                    <tr> 
+                        <td><span class="badge badge-secondary">{{ order.reference }}</span></td>
+                        <td>{{ order.getCreatedAt()|date('d/m/y') }}</td>
+                        <td>{{ order.getOrderDetails()|length  }}</td>
+                        <td>{{ ((order.getCarrierPrice() + order.getTotal()) / 100)|number_format(2, ',', '.') }} €</td>
+                        <td class="text-right"><a href="{{ path('account_order_show', { 'reference' : order.reference }) }}">Voir ma commande</a></td>
+                    </tr>   
+                {% endfor %}   
+             </tbody>
+        </table>    
+    {% endif %}
+{% endblock %}

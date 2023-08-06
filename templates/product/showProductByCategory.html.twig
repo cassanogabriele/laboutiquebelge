@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category }} - Le Boutique Belge{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">{{ category }}</h1>
+
+    <div class="row product-container">
+        {% for product in productsByCategory %}
+            <div class="col-md-4 mb-5">
+                <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid articleByCategory img-thumbnail">
+                <h3>{{ product.name }}</h3>
+
+                <p>{{ product.subtitle }}</p>
+
+                <span class="product-page-price">{{ (product.price / 100) | number_format(2, ',', '.') }}</span>
+
+                <hr>
+
+                <p>{{ product.description }}</p>
+                
+                <div class="text-center">
+                    <a href="" class="btn btn-outline-warning">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="{{ path('add_to_cart', { 'id': product.id}) }}" class="btn btn-outline-primary">
+                        <i class="fas fa-cart-plus"></i>
+                    </a>
+                </div>
+            </div>
+            
+            {% if loop.index % 3 == 0 %}
+                </div><div class="row product-container">
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

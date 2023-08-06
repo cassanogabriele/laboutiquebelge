@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande - La boutique belge!{% endblock %}
+
+{% block content %}
+    <h2>Je passe ma commande</h2>
+
+    <p>Choisissez vos préférences avant de passer votre commande sur la boutique belge.</p>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">    
+            {% set formHtml %}
+                {{ form_start(form, {action:path('order_recap')}) }}
+                    {{ form_label(form.addresses, 'Choisissez votre adresse de livraison') }}
+                    <a href="{{ path('account_address_add') }}">Ajouter une nouvelle adresse</a>
+                {{ form_end(form) }}
+            {% endset %}
+
+            {{ formHtml|replace({'[br]' : '<br>'})|raw }}
+        </div>
+
+        <div class="col-md-6">  
+            <div class="text-center">
+                <b>Recap de ma commande</b>
+
+                <p>Retrouvez le récapitulatif de vos produits</p>
+            </div>           
+
+            <br>   
+
+            <div class="order-summary">
+                {% for key, product in cart %}
+                    <div class="row {% if key > 0 %}mt-3{% endif %}">
+                        <div class="col-2">
+                            <img src="/uploads/{{ product.product.illustration }}" height="75" alt="{{ product.product.name }}"> 
+                        </div>
+                        <div class="col-4 my-auto">
+                        {{ product.product.name }} 
+                        </div>
+                        <div class="col-3 my-auto">
+                           Qté : {{ product.quantity }}
+                        </div>    
+
+                        <div class="col-3 my-auto">
+                            Prix :  {{ product.product.price / 100 }} €
+                        </div>               
+                    </div>               
+                {% endfor %}
+            </div>            
+        </div>
+    </div>
+{% endblock %}

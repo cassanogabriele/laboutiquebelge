@@ -1,0 +1,118 @@
+.navbar-item-custom, .navbar-item-custom a{
+    color: #fff;
+}
+
+.footer-custom{
+    text-align: center;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    padding-top: 25px;
+    margin-top: 50px;
+}
+
+.product-item h5{
+    text-transform:uppercase;
+    font-size: 15px;
+    margin-bottom: 1px;
+}
+
+.product-item{
+    margin-top: 50px;
+}
+
+.product-item .product-subtitle{
+   font-size: 14px;
+   display: block;
+}
+
+.product-item .product-price{
+    font-size: 14px;
+ }
+
+.product-page-price{
+    font-size: 16px;
+}
+
+.cart-icon{
+    height: 20px;
+    padding-left: 20px;
+}
+
+.block-small{
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-check{
+    background-color: #f4f8ff;
+    padding: 20px 65px;
+    margin-top: 7px;
+}
+
+.col-form-label{
+    font-weight: bold;
+}
+
+.order-summary{
+    background-color: #f4f8ff;    
+    padding: 20px;
+    margin-top: 21px;
+}
+
+.custom-carousel{ height: 500px !important; }
+
+.small-square-image {
+    width: 200px !important; 
+    height: 200px !important; 
+    object-fit: cover;
+}
+
+.wishlist-infos{ font-size: 19px; }
+
+/* Compte utilisateur*/
+.all-boxes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 150px;
+}
+
+.paragraphs{
+    font-size: 18px;
+}
+
+#adresses{ margin-top: 65px; }
+
+#no-adress{ margin-top: 85px; }
+
+a.boxes {
+    text-decoration: none;
+    color: white;
+}
+
+.boxes {
+    width: 300px;
+    height: 100px;
+    background-color: #17a2b8;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.boxes:hover {
+    background-color: #09ccf4; 
+}
+
+@media (max-width: 768px) {
+    .boxes {
+        width: 120px;
+    }
+}

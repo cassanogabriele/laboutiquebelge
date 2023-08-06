@@ -21,4 +21,16 @@ services:
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # please note that last definitions always *replace* previous ones  
+    App\Service\CartService:
+        arguments:
+            - '@App\Classes\Cart'
+            - '@security.helper'
+            - '@session'
+            - '@doctrine.orm.entity_manager'
+
+    App\Twig\CartExtension:
+        arguments:
+            - '@App\Service\CartService'
+        tags:
+            - { name: twig.extension }

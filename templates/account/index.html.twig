@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - La Boutique Belge{% endblock %}
+
+{% block content %}    
+    <div class="container">
+        <h1>Mon compte</h1>
+
+        <div class="paragraphs" class="mt-3">
+            <p>Bienvenu dans votre compte <b>{{ app.user.firstname }}</b></p>
+            <p>C'est dans cet espace que vous allez pouvoir gérer toutes vos informations personnelles.</p> 
+        </div>
+    </div>         
+
+    <div class="container all-boxes">   
+        <a class="boxes" href="{{ path('account_password') }}">Modifier mon mot de passe</a>
+        <a class="boxes" href="{{ path('account_address') }}">Gérer mes adresses</a>
+        <a class="boxes" href="{{ path('account_order') }}">Gérer mes commandes</a>
+    </div>
+
+{% endblock %}

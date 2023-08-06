@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes de souhait - La Boutique Belge{% endblock %}
+
+{% block content %}  
+    <div class="container">
+        <div class="container">
+            <div id="message"></div>
+        </div>   
+
+        <div class="justify-content-center mb-5 text-center">
+            <div id="confirmation-message"></div>
+        </div>
+
+        <div class="row">         
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ asset('uploads/wishlists.jpg') }}" alt="listes de souhait">
+
+                    <div class="card-body" id="infos-wishlist">
+                        <h5 class="card-title font-weight-bold text-center">Vos listes de souhaits</h5> 
+
+                       {% if wishlists|length > 0 %}
+                        <ul id="wishlist-list">
+                            <form method="POST">
+                                {% for wishlist in wishlists %}
+                                <li class="d-flex justify-content-between align-items-center mb-2" data-wishlist-id="{{ wishlist.id }}">
+                                    <a href="">{{ wishlist.name }}</a>
+                                    
+                                    <button type="button" class="btn btn-danger btn-sm btn-icon wishlist-delete-btn">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </li>
+                                {% endfor %}
+                            </form>
+                        </ul>
+                        {% else %}
+                            <div class="empty-list d-flex justify-content-center align-items-center">
+                                <div class="container">
+                                    <div class="alert alert-danger text-center" role="alert">
+                                        Vous n'avez pas de liste de souhaits.
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 border infos mb-5">
+                <div class="text-center">
+                    <div class="wishlist-msg">
+                        {% if wishlists|length > 0 %}
+                        <div class="container">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 40vh;">
+                                <div class="alert alert-warning text-center" role="alert">
+                                    Veuillez choisir une liste de souhait en cliquant sur son nom.
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="container">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 40vh;">
+                                <div class="alert alert-danger text-center" role="alert">
+                                    Veuillez créer une liste de souhait. 
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+ 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="{{ asset('assets/js/wishlists.js') }}"></script>
+{% endblock %}

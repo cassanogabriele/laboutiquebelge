@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement de ma commande - La boutique belge!{% endblock %}
+
+{% block content %}
+    <h2>Ma commande</h2>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">    
+           <strong>Mon adresse de livraison</strong>
+            <br>
+            <div class="form-check mt-4">
+                {{delivery|raw}}
+            </div>
+
+            <hr>
+
+            <div class="form-check">
+            <strong>Mon transporteur</strong>
+            <br>
+            {{carrier.name}}
+            <br>
+            {{carrier.description}}
+            <br>
+            {{ (carrier.price / 100) | number_format(2, ',', '.') }} €      
+            </div>
+        </div>
+
+        <div class="col-md-6">  
+            <div class="text-center">
+                <b>Recapitulatfi de commande</b>
+
+                <p>Retrouvez le récapitulatif de vos produits</p>
+            </div>           
+
+            <br>
+
+            <div class="order-summary">            
+                {% set total = null %}
+                {% for key, product in cart %}            
+                    <div class="row {% if key > 0 %}mt-3{% endif %}">
+                        <div class="col-2">
+                            <img src="/uploads/{{ product.product.illustration }}" height="75" alt="{{ product.product.name }}"> 
+                        </div>
+                        <div class="col-8 my-auto">
+                        {{ product.product.name }} <br> x {{ product.quantity }}
+                        </small>
+                        </div>
+                        <div class="col-2 my-auto">
+                          
+                            {{ ((product.product.price * product.quantity) / 100) | number_format(2, ',', '.') }} €
+                        </div>                  
+                    </div>    
+                  
+                    {% set total = total + (product.product.price * product.quantity) %}
+                {% endfor %}
+            </div>         
+
+            <br>
+
+            <strong>Sous-Total : </strong> {{ (total / 100) | number_format(2, ',', '.')   }} €
+
+            <br>
+
+            <strong>Livraison : </strong> {{ (carrier.price / 100) | number_format(2, ',', '.')   }} €
+
+            <hr>
+
+            <strong>Total : </strong> {{ ((total / 100) + (carrier.price / 100)) | number_format(2, ',', '.')   }} €
+
+            <a href="{{ path('order_confirmation', {'orderNumber': orderNumber}) }}" class="btn btn-success btn-block mt-3" id="checkout-button">
+                Payer | {{ ((total / 100) + (carrier.price / 100)) | number_format(2, ',', '.') }} €
+            </a>
+        </div>
+    </div>
+{% endblock %}

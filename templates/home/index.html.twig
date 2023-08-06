@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block carousel %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    {% for category in categories %}
+        <div class="col-lg-4">
+            <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{{ asset('assets/img/presentation/' ~ category.image) }}"
+            alt="{{ category.name }}" />                 
+
+            <h2>{{ category.name }}</h2>
+
+            <p>{{ category.description }}</p>
+            <p><a class="btn btn-secondary" href="{{ path('product_by_category', { 'category' : category.name } ) }}" role="button">Voir les détails &raquo;</a></p>
+        </div>
+    {% endfor %}
+</div>
+
+{% for key, product in products %}
+    <div class="row featurette">
+        {% if key == 1 %}
+            <div class="col-md-3">
+                <img src="{{ asset('uploads/' ~ product.illustration) }}" class="img-thumbnail">
+            </div>
+        
+            <div class="col-md-7">
+                <h2 class="featurette-heading"><span class="text-muted">{{ product.name }}</span></h2>
+        
+                <p class="lead">
+                    {{ product.description }}
+                </p>
+            </div>
+        {% else %}
+            <div class="col-md-7">
+                <h2 class="featurette-heading"><span class="text-muted">{{ product.name }}</span></h2>
+        
+                <p class="lead">
+                    {{ product.description }}
+                </p>
+            </div>
+            
+            <div class="col-md-3">
+                <img src="{{ asset('uploads/' ~ product.illustration) }}" class="img-thumbnail">
+            </div>
+        {% endif %}
+    </div>
+
+    <hr class="featurette-divider">
+{% endfor %}
+
+
+{% endblock %}
